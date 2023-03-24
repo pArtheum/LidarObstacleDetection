@@ -16,7 +16,7 @@ To avoid any duplicated code, make it more cleaner and more maintable, we using 
 
 The real PCD data containes more points than the simulated ones and represent a real 3D space with all objects that a car may encounter on a road.
 
-![img1]("images/input.PNG")
+<img src="images/input.PNG" width="800" height="400" />
 
 In addition, due to uncontrolled environment, the real PCD may present incorrect points placement due to reflection or laser absorbtion. Those unexpected points may lead, in the next stages, to create False Positive or True Negatives detections.
 <BR><BR><BR>
@@ -36,7 +36,8 @@ The filters that we will apply:
 After applying all those filters, the number of points drop from 118703 down to 1187 (Number of points for the displayed example)
 <strong>The point Cloud was reduce by 99.9%.</strong>
 
-![img2]("images/filter.PNG")
+<img src="images/filter.PNG" width="800" height="400" />
+
 <BR><BR><BR>
 
 ## Plane Segmentation
@@ -46,7 +47,7 @@ To do that, we will segment our pointCloud using Ransac fitting method.
 Basically, Ransac will maximize the number of point belonging to a requested shape (line, plane).
 In our case, we configuring RANSAC to try to fit the maximum points as possible to a plane and consider that plane is the road.
 
-![img3]("images/segment_plane.PNG")
+<img src="images/segment_plane.PNG" width="800" height="400" />
 
 The downside of this method, it's that the results will depend of the RANSAC parameters. One of them, will also impact the runtime of our algorithms and it's the number of iterations. So more iterations we will request, more precise it will be, but more time it will take.
 
@@ -57,7 +58,7 @@ The downside of this method, it's that the results will depend of the RANSAC par
 At this point, we are able to differentiate road from other objects. Neverthless, it's not sufficient for collision avoidance. Points that not belongs to the road are part of another object, but you might have several objects with different shapes and trajectories. To split our objects points into different instances we are using Clustering method. Precisely,  we will use Euclidean Clustering.
 The Euclidean Clustering uses KD Tree to enhance neighbours points search and Euclidean distance to evaluate the distance between them.
 
-![img1]("images/clustering.PNG")
+<img src="images/clustering.PNG" width="800" height="400" />
 
 To further clean our cloud points, we adding a minimum number of points to consider it as an instance and also a maximum number of points.
 
