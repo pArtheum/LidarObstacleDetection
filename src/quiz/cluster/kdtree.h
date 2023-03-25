@@ -30,7 +30,7 @@ struct KdTree
 			*node = new Node(point, id);
 		}
 		else{
-			uint cyndex = depth % 2;
+			uint cyndex = depth % 3;
 			if(point[cyndex] < ((*node)->point[cyndex])){
 				insertHelper(&((*node)->left), depth+1, point, id);
 			}
@@ -51,19 +51,25 @@ struct KdTree
 			if((node->point[0]>=(target[0]-distanceTol) && 
 				node->point[0]<=(target[0]+distanceTol)) && 
 				(node->point[1]>=(target[1]-distanceTol) &&	
-				node->point[1]<=(target[1]+distanceTol)))
+				node->point[1]<=(target[1]+distanceTol)) &&
+				(node->point[2]>=(target[2]-distanceTol) &&
+				node->point[2]<=(target[2]+distanceTol))
+				)
 			{
-				float distance = sqrt((node->point[0]-target[0])*(node->point[0]-target[0])	+(node->point[1]-target[1])*(node->point[1]-target[1]));
+				float distance = sqrt((node->point[0]-target[0])*(node->point[0]-target[0])	+
+							(node->point[1]-target[1])*(node->point[1]-target[1]) +
+							(node->point[2]-target[2])*(node->point[2]-target[2])
+							);
 				if(distance<=distanceTol)
 				{
 					ids.push_back(node->id);
 				}
 			}
-			if((target[depth%2]-distanceTol)<node->point[depth%2])
+			if((target[depth%3]-distanceTol)<node->point[depth%3])
 			{
 				searchHelper(target, node->left, depth+1, distanceTol, ids);
 			}
-			if((target[depth%2]+distanceTol)>node->point[depth%2])
+			if((target[depth%3]+distanceTol)>node->point[depth%3])
 			{
 				searchHelper(target, node->right, depth+1, distanceTol, ids);
 			}

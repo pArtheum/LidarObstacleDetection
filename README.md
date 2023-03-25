@@ -33,8 +33,8 @@ The filters that we will apply:
 >- Remove points reflected by the ego car. Depending on how the Lidar is installed, some lidar beams might detect the car roof it self.
 >- Move to voxelgrid representation. Lidar can have a very high resolution, especially due to radial point distribution, closer you are to the laser and higher is the resolution. To reduce the number of points and make our point cloud distribution more linear, we introduce VoxelGrid representation. By doing that we will resume a 3D volume by a unique point.
 
-After applying all those filters, the number of points drop from 118703 down to 1187 (Number of points for the displayed example)
-<strong>The point Cloud was reduce by 99.9%.</strong>
+After applying all those filters, the number of points drop from 118703 down to 10187 (Number of points for the displayed example)
+<strong>The point Cloud was reduce by approximately 92%.</strong>
 
 <img src="images/filter.PNG" width="800" height="400" />
 
@@ -65,9 +65,9 @@ To further clean our cloud points, we adding a minimum number of points to consi
 The quality of clustering is highly impacted by the parametrization of the Clustering function, the min, the max number of points and especially the distance threshold between points.
 
 For our configuration, we are using:
->- Distance Threshold 0.5
->- 5 
->- 400
+>- Distance Threshold 0.42
+>- 18
+>- 1500
 
 Using those parameters, allows us to discriminate and detect a pole from traffic_sign/traffic_light.
 
