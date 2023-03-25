@@ -161,9 +161,6 @@ int main (int argc, char** argv)
     pcl::visualization::PCLVisualizer::Ptr viewer (new pcl::visualization::PCLVisualizer ("3D Viewer"));
     CameraAngle setAngle = XY;
     initCamera(setAngle, viewer);
-    //simpleHighway(viewer);
-    cityBlock(viewer);
-
 
     ProcessPointClouds<pcl::PointXYZI>* pointProcessorI = new ProcessPointClouds<pcl::PointXYZI>();
     std::vector<boost::filesystem::path> stream = pointProcessorI->streamPcd("../src/sensors/data/pcd/data_1");
@@ -175,7 +172,7 @@ int main (int argc, char** argv)
         viewer->removeAllPointClouds();
         viewer->removeAllShapes();
 
-        // Load pcd and run obstacle detection process
+        // Iterate over pcd files to emulate stream
         inputCloudI = pointProcessorI->loadPcd((*streamIterator).string());
         cityBlock(viewer, pointProcessorI, inputCloudI);
 
